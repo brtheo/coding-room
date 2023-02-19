@@ -1,17 +1,28 @@
-const DIRECTORY = "https://raw.githubusercontent.com/brtheo/blog/master";
-const COMMIT = 'https://api.github.com/repos/brtheo/blog/commits?path='
+import { Base64 } from "https://deno.land/x/bb64/mod.ts";
 
+const CONTENTS = "https://api.github.com/repos/brtheo/blog/contents/" as const;
+const COMMIT = 'https://api.github.com/repos/brtheo/blog/commits?path=' as const;
+
+const headers = new Headers();
+headers.append('Authorization',Deno.env.get('GITKEY') as string);
+headers.append('Accept','application/vnd.github+json');
+
+console.log(Deno.env.get('GITKEY'))
 export interface IPost {
   slug: string;
   title: string;
   publishedAt: string;
   snippet: string;
   content: string;
-}
+} 
 
 
 function kebabRemover(slug: string): string {
   return slug.replaceAll('-',' ')
+}
+
+function getDate(o: any, idx = -1) {
+  return new Date(o.at(idx)['commit']['author']['date']).toDateString()
 }
 
 // Get posts.
@@ -28,31 +39,23 @@ function kebabRemover(slug: string): string {
 // }
 
 // Get post.
-export async function getPost(slug: string): Promise<IPost | null> {
-  // const 
-  //   res = await fetch(`${DIRECTORY}/${slug}.md`),
-  //   res2 = await fetch(`${COMMIT}/${slug}.md`)
-  
-  // const
-  //   content = await res.text(),
-  //   json = await res2.json()
-  // ;
-  // console.log(json)
-  const [res, res2] = await Promise.all([
-    fetch(`${DIRECTORY}/${slug}.md`),
-    fetch(`${COMMIT}/${slug}.md`)
+export async function getPost(slug: string): Promise<IPost> {
+  const [rawContent, rawCommit] = await Promise.all([
+    fetch(`${CONTENTS}/${slug}.md`),
+    fetch(`${COMMIT}/${slug}.md`, { headers })
   ])
-  const [content, json] = await Promise.all([
-    res.text(),
-    res2.json()
+  const [jsonContent, jsonCommit] = await Promise.all([
+    rawContent.json(),
+    rawCommit.json()
   ]);
-  const date = 1676828113594
-  // const date = json.at(-1)['commit']['author']['date']
+  // const date = 1676828113594
+  const publishedAt = getDate(jsonCommit);
+  const content = Base64.fromBase64String(jsonContent.content).toString();
   return {
     slug,
     title: kebabRemover(slug),
-    publishedAt: new Date(date).toDateString(),
-    content: content,
+    publishedAt,
+    content,
     snippet: 'snippet',
   };
 }

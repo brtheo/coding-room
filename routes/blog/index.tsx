@@ -5,10 +5,10 @@ import Menu from "../../components/Menu.tsx";
 import Post from "../../components/Post.tsx";
 import { CSS} from "https://deno.land/x/gfm/mod.ts";
 import { getPost, IPost } from "../../utils/bloggish.ts";
-// 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
+
 
 export const handler: Handlers<IPost> = {
-  async GET(_req,ctx) {
+  async GET(_req, ctx) {
     const post = await getPost('first-blog-post')
     return ctx.render(post as IPost)
   }
@@ -31,9 +31,10 @@ export default function Blog(props: PageProps<IPost>) {
         <Header />
         <Menu />
         <main 
+          data-blog-post
           data-color-mode="dark"
           data-dark-theme="dark"
-          class="markdown-body place-self-center  min-h-full w-[100vw] md:w-[760px] row-start-3 col-start-2 p-2 rounded-3xl" >
+          class="markdown-body place-self-center min-h-full w-[95vw] md:w-[760px] row-start-3 col-start-2 p-2 mt-5" >
           <Post post={post}/>
         </main>
       </section>

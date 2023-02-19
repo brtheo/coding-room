@@ -33,3 +33,9 @@ header {
 :is(ol,ul):not( > nav) {
   list-style-type: auto !important;
 }
+
+[data-blog-post] {
+  background: rgb(18 23 23 / 54%) !important;
+  backdrop-filter: blur(1px);
+  border-radius: 6px;
+}
