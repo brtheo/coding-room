@@ -30,12 +30,12 @@ export default function Content(props: JSX.HTMLAttributes<HTMLElement>) {
           <TextGradient>
               I'm Theo Brossier <br/>
               Full Stack lead engineer at Capgemini ♠️ <br/>
-              Living in Nantes
+              Living in Nantes, France
           </TextGradient>
         </section>
         <section id="desc" data-pop style="--animationDelay:3">
           <TextGradient>
-              I work mainly with Typescript, Go, Apex<br/>
+              Typescript is the way to go and Deno has made my life easier<br/>
               I love web components and believe it's the future<br/>
               I'm also a 4x certified <Salesforce /> developer
           </TextGradient>
