@@ -18,7 +18,7 @@ export default function Home({url}) {
       </Head>
       <div id="entry" class="p-4 mx-auto w-screen h-screen bg-black text-white text-[6vh] grid place-content-center overflow-hidden" >
         <Content  />  
-        <Fancy text="Hello" cancel={search?.includes('cancelAnimation')}/>
+        <Fancy text="Hello" cancel={true}/>
         
       </div>
     </>
