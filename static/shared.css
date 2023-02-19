@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono&display=swap');
+@font-face {
+  font-family: 'Cartograph CF';
+  src: 
+    url(./fonts/CartographCF-Regular.woff2),
+    url(./fonts/CartographCF-Regular.woff),
+    url(./fonts/CartographCF-Regular.ttf);
+}
+:root {
+  /* --hue1: #dd6da1;
+  --hue2:  #0070ad; */
+  --svgSize: 140px;
+  --hue1: #61c941;
+  --hue2:  #177db9;
+  --tf: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --x: 0px;
+  --y: 0px;
+  --spiralPath : path("M116 269C251 197 124.517 69.4516 80.8108 149.913C46 213.998 40.7963 409.882 203 287C306 208.97 263.381 29.0281 142 49.9938C-77.9998 87.9937 14.4819 340.935 60 357C128 381 261.314 363 282.387 255C298.387 173 313.814 81.0217 206.387 0.992798");
+}
+@property --rad {
+  initial-value: 0deg;
+  inherits: true;
+  syntax: '<angle>';
+}
+* {
+  transition: --rad 1s linear;
+}
+*::selection {
+  background-color: rgba(95, 47, 109, 0.308);
+}
+
+body {
+  background-color: black;
+  transition: rotate .23s ease-in-out, scale .23s ease-in-out;
+  overflow: hidden;
+  font-family: 'Cartograph CF', monospace;
+}
+
+
+.textGradient {
+  background: linear-gradient(var(--rad), var(--hue1), var(--hue2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
+nav {
+  display: flex;
+  position: absolute;
+}
+
+nav li {
+  --tf: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition:
+    translate .42s var(--tf), 
+    scale .42s var(--tf)
+  ;
+}
+nav li .textGradient {
+  background: linear-gradient(calc(var(--rad)*var(--idx)), var(--hue1), var(--hue2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+nav li:hover  {
+  translate: 2rem 0;
+  scale: 1.2;
+}
+/* LIFT EVERYTHING UP AND DOWN */
+nav li:has(~ li:hover) {
+  translate: 0 -10vh;
+  scale: .9;
+}
+nav li:hover ~ li {
+  translate: 0 10vh;
+  scale: .9;
+}
+
+#me {
+  width: var(--svgSize);
+}

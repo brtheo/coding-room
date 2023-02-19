@@ -1,0 +1,123 @@
+@keyframes rotater {
+  25% {rotate: 33deg}
+  50% {rotate: -48deg}
+  75% {rotate: 376deg}
+  100% {rotate: -343deg}
+}
+
+@keyframes typeWriterAnimation {
+  0% {
+    width:100%;
+    border-left: 1px white solid;
+  }
+  15% {
+    border-left-color: black;
+  }
+  30% {
+    border-left-color: white;
+  }
+  45% {
+    border-left-color: white;
+  }
+  60% {
+    border-left-color: black;
+  }
+  75% {
+    border-left-color: white;
+  }
+  100% {
+    width: 0px;
+    display: none;
+    border-left-width: 0px;
+  }
+}
+
+@keyframes glowing {
+  from,to {
+    text-shadow: 0 0 10px white;
+  }
+  50% {
+    text-shadow: 0 0 0px white;
+  }
+}
+
+@keyframes fadeOut {
+  80% {   
+    scale: 0;
+    /* translate: 0 -200vh;  */
+    opacity: 0;
+  }
+  to {
+    display: none;
+    position: absolute;
+    ocapity: 0;
+    scale: 0;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    scale: .4;
+    opacity: 0;
+  }
+  to {
+    scale: 1;
+    opacity: 1;
+  }
+}
+
+@keyframes movebg {
+  from, to {
+    background-position: -19px -19px;
+  }
+  25% {
+    background-position: -29px -29px;
+  }
+  50% {
+    background-position: -19px -29px;
+  }
+  75% {
+    background-position: -29px -19px;
+  }
+}
+
+@keyframes pop {
+  from {scale: 0;}
+  75% {scale: 1.2;}
+  to {scale: 1;}
+}
+
+@keyframes breathing {
+  from, to {
+    transform: translate3d(0px, 0px, 0) scale(0.95);
+    filter: blur(47px);
+  }
+  50% {
+    transform: translate3d(0px, 0px, 0) scale(.2);
+    filter: blur(10px);
+  }
+}
+
+
+@keyframes rotating {
+  to {
+    rotate: 1turn
+  }
+}
+@keyframes rotatingReverse {
+  to {
+    rotate: -1turn
+  }
+}
+
+@keyframes drawGlitch {
+  from {
+    stroke-dashoffset: 300; 
+    stroke-dasharray:  700;
+    /* stroke-dasharray:  8589.72; */
+  }
+  to {
+    stroke-dashoffset: 300; 
+    stroke-dasharray: 8589.72;
+  }
+}

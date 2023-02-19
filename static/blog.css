@@ -1,0 +1,35 @@
+@import url("https://use.typekit.net/ppc0skv.css");
+
+@media screen and (max-width: 768px) {
+  :root {
+    --svgSize: 100px;
+  }
+  nav {
+    display: none;
+  }
+}
+
+body {
+  overflow-y: scroll;
+}
+
+nav {
+  position: initial;
+  padding: 0rem !important;
+  grid-row: 2;
+  grid-column: 1;
+}
+header {
+  grid-row: 1;
+  grid-column: 2 !important;
+}
+
+#content {
+  background-image: radial-gradient(rgba(223, 223, 223, 0.281) 1px, transparent 0);
+  background-size: 70px 70px;
+  background-position: -19px -19px;
+}
+
+:is(ol,ul):not( > nav) {
+  list-style-type: auto !important;
+}

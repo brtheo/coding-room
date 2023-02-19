@@ -1,0 +1,84 @@
+:root {
+  --typeWriterDuration: 1.1s;
+}
+body[data-state=ready] #fancy {
+  animation: fadeOut 1.5s cubic-bezier(0.47, 0, 0.745, 0.715) forwards;
+}
+body[data-state=cancel] #fancy {
+  display: none;
+}
+
+#fancy, 
+[data-letter]{
+  transition: 
+    rotate .93s ease-in-out, 
+    column-gap .93s ease-in-out,
+    opacity .93s ease-in-out;
+  user-select: none;
+}
+#fancy[data-rotated=off] {
+  animation:glowing 3.2s cubic-bezier(0.39, 0.575, 0.565, 1) infinite;
+}
+#fancy[data-rotated=on] {
+  rotate: 90deg;
+  column-gap: 0px !important;
+}
+
+#fancy[data-rotated=on] [data-letter]{
+  rotate: -90deg;
+  /* max-width: 0px;  */
+}
+
+[data-letter] {
+  box-sizing: content-box;
+}
+
+#fancy[data-rotated=on] [data-letter]:is(:nth-child(4),:nth-child(3)){
+  opacity: 0;
+
+}
+#fancy[data-rotated=on] [data-letter]:nth-child(2){
+  max-width: fit-content;
+}
+
+#fancy[data-rotated=on] [data-letter]:nth-child(5) {
+  translate: 0 130%;
+}
+#fancy[data-rotated=on] [data-letter]:nth-child(2) {
+  translate: 0 160%;
+}
+#fancy[data-rotated=on] [data-letter]:nth-child(2) [data-step="2"] {
+  translate: 50%;
+}
+.letterHidden {
+  display: none;
+  position: relative;
+}
+.typeWriter::after {
+  content: '';
+  /* border: 1px red solid; */
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: black;
+  top: 0; right: 0;
+  box-sizing: content-box;
+}
+#fancy[data-rotated=on] :is(.typeWriter, .done).letterHidden {
+  display: inline-flex;
+}
+
+.typeWriter::after {
+  animation: var(--typeWriterDuration) ease-in-out typeWriterAnimation forwards;
+  animation-delay: calc( var(--typeWriterDuration) * var(--delayMultiplier))
+}
+
+
+
+
+
+
+
+
+
+
