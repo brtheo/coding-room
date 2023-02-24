@@ -39,3 +39,6 @@ header {
   backdrop-filter: blur(1px);
   border-radius: 6px;
 }
+.markdown-body {
+  background-color: unset !important;
+}

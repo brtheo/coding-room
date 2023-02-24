@@ -3,8 +3,7 @@ import Fancy from "../islands/Fancy.tsx";
 import Content from "../components/Content.tsx";
 
 
-export default function Home({url}) {
-  const {search} = url
+export default function Home() {
   
   return (
     <>
