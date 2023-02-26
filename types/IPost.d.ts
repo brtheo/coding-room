@@ -6,4 +6,5 @@ export interface IPost {
   tags: string[];
   content: string;
   author: string;
+  author_pic: string;
 } 

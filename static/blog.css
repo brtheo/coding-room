@@ -4,22 +4,24 @@
   :root {
     --svgSize: 100px;
   }
-  nav {
-    display: none;
-  }
 }
 
 body {
   overflow-y: scroll;
 }
 
+/**
+line1 rotate: 25deg;
+line2 rotate: -25deg;
+    translate: -6px 4px;
+**/
 nav {
   position: initial;
   padding: 0rem !important;
   grid-row: 2;
   grid-column: 1;
 }
-header {
+.siteHeader {
   grid-row: 1;
   grid-column: 2 !important;
 }
@@ -42,3 +44,34 @@ header {
 .markdown-body {
   background-color: unset !important;
 }
+
+dl[data-tags]::-webkit-scrollbar {
+  width:1px;
+}
+dl[data-tags]::-webkit-scrollbar-thumb {
+  background-color: #ffffff00;
+}
+dl[data-tags] {
+  margin-bottom: 0 !important;
+  gap: .25rem;
+  position: absolute;
+}
+dl[data-tags] dt {
+  margin-top: 0 !important;
+  transform: scale(1);
+  line-height: 1;
+  border: 2px solid white;
+  padding: .25rem .5rem !important;
+  border-radius: 100vh;
+  /* transform-origin: left;
+  transition: transform .23s var(--tf);
+  transition-delay: calc(.05s * var(--idx)); */
+  cursor: pointer;
+}
+dl[data-tags] dt::before {content: '#'}
+/* dl[data-tags] dt:first-child {
+  transform: scaleX(1);
+}
+dl[data-tags]:hover dt{
+  transform: scaleX(1);
+} */

@@ -55,7 +55,6 @@ body[data-state=ready] #content{
 .salesforce {
   -webkit-text-fill-color: #00a1e0;
   cursor: pointer;
-  /* border: solid 1px red; */
 }
 
 .imgBox {

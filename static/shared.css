@@ -36,11 +36,32 @@ body {
   font-family: 'Cartograph CF', monospace;
 }
 
+:is(#content main, body)::-webkit-scrollbar {
+  width:3px;
+}
+:is(#content main, body)::-webkit-scrollbar-thumb {
+  background-color: #1e2020b6;
+}
+
 
 .textGradient {
   background: linear-gradient(var(--rad), var(--hue1), var(--hue2));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+[data-menu-icon] ~ svg line{
+  transition: transform .24s var(--tf);
+  transform: rotate(0) translate(0);
+}
+[data-menu-icon]:checked ~ svg line:nth-child(1) {
+ transform: rotate(35deg) translate(-1px, -6px);
+}
+[data-menu-icon]:checked ~ svg line:nth-child(2) {
+ transform: rotate(-35deg) translate(-8px, 1px);
+}
+[data-menu-icon]:checked ~ nav {
+ transform: translateY(0);
 }
 
 

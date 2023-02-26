@@ -19,7 +19,7 @@ function MeLigned() {
 export default function Header(props: JSX.HTMLAttributes<HTMLElement>) {
   
   return(
-    <header data-pop style="--animationDelay:1" class="flex items-center mx-auto row-span-1 col-span-2">
+    <header data-pop style="--animationDelay:1" class="siteHeader flex items-center mx-auto row-span-1 col-span-2">
       <div id="me">
         <MeLigned />
       </div>
