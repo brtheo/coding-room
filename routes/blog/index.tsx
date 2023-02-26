@@ -2,6 +2,8 @@ import type { IPost } from "../../types/Octoblog.d.ts";
 
 import { Head } from "$fresh/runtime.ts";
 import { CSS } from "$gfm";
+import "https://esm.sh/prismjs@1.27.0/components/prism-typescript?no-check";
+import "https://esm.sh/prismjs@1.27.0/components/prism-bash?no-check";
 import { Handlers, PageProps } from "$fresh/server.ts";
 
 import Header from "../../components/Header.tsx";

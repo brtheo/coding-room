@@ -1,6 +1,7 @@
 import type { IContent, ICommit, ITree, IPost, IBlob} from "../types/Octoblog.d.ts";
 import { Base64 } from "https://deno.land/x/bb64/mod.ts";
 import { extract } from "https://deno.land/std@0.178.0/encoding/front_matter/any.ts";
+import { TreeElement } from "../types/ITree.d.ts";
 
 const ENV = Deno.env.toObject();
 
@@ -30,6 +31,7 @@ type ResponseType<T extends Endpoint> = T extends keyof EndpointResponseMap
 
 type EndpointResponseMap = {
   "git/blobs/": IBlob;
+  "contents/": IContent;
   "commits?sha=dev&path=": ICommit | ICommit[];
   "commits?sha=master&path=": ICommit | ICommit[];
   "git/trees/master": ITree;
@@ -57,12 +59,12 @@ export default class Octoblog {
   public static repo: string;
 
   private static makePost(blob: IBlob | IContent, commits: Array<ICommit>, slug: string): IPost{
-    slug = slug.replace('.md','')
+    slug = slug.replace('.md','');
     const title = slug.replaceAll('-',' ');
-    const makeDate = (index = -1) => new Date((commits.at(index)?.commit.author.date as Date)).getTime()
+    const makeDate = (index = -1) => new Date((commits.at(index)?.commit.author.date as Date)).getTime();
     const {attrs, body} = extract(Base64.fromBase64String(blob.content).toString());
-    const author = commits.at(-1)?.committer.login
-    const author_pic = commits.at(-1)?.committer.avatar_url
+    const author = commits.at(-1)?.committer.login;
+    const author_pic = commits.at(-1)?.committer.avatar_url;
     return {
       slug,
       title,
@@ -72,7 +74,7 @@ export default class Octoblog {
       author,
       author_pic,
       tags: attrs.tags
-    } as IPost
+    } as IPost;
   }
 
   private static makeUrl<T extends Endpoint>(endpoint: T, params?: Param<T>["params"]) {
@@ -127,7 +129,7 @@ export default class Octoblog {
   }
 
   public static async getAllPosts(): Promise<IPost[]> {
-    const treeElements = (await Octoblog.get(ENDPOINTS.TREE)).tree;
+    const treeElements: TreeElement[] = (await Octoblog.get(ENDPOINTS.TREE)).tree.filter(treeElement => treeElement.path.includes('.md'));
     const pathToShaTuples = treeElements.map(post => [post.path, post.sha]);
     return (await Promise.all(pathToShaTuples.map(tuple => Octoblog.getPost(tuple))))
       .sort((postA, postB) => postB.publishedAt - postA.publishedAt);
