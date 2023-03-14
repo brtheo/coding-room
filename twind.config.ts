@@ -12,7 +12,9 @@ export default {
       serif: ['sofia-pro-condensed']
     },
     borderRadius: {
-      'blob': '59% 41% 13% 58% / 64% 75% 25% 35%'
+      'blob': '59% 41% 13% 58% / 64% 75% 25% 35%',
+      '5': '5rem',
+      'md': '6px',
     },
     backdropBlur: {
       'md': '20px',
