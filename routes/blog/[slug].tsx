@@ -48,7 +48,6 @@ export const handler: Handlers<postWithComment> = {
     const isTurnistileValidated = await turnstileValidation(turnstileToken, turnstileIp);
     if(isTurnistileValidated) 
       await Octoblog.commitComment(props,(slug as string))
-    console.log(...props,turnstileIp)
 
     return await handler['GET'](_req,ctx)
   },

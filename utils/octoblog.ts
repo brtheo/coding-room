@@ -182,14 +182,19 @@ export default class Octoblog {
   }
 
   public static async getCommentsByPost(slug: string): Promise<[IComment[], sha]> {
-    const ALLtreeElements: TreeElement[] = (await Octoblog.get(ENDPOINTS.COMMENTS_TREE)).tree.filter(treeElement => treeElement.path.includes(`${slug}`));
-    const head: TreeElement[] = ALLtreeElements.filter( treeElement => !treeElement.path.includes(`${slug}/`))
-    const treeElements: TreeElement[] = ALLtreeElements.filter( treeElement => treeElement.path.includes(`${slug}/`))
+    const response = await Octoblog.get(ENDPOINTS.COMMENTS_TREE)
+    if(response.message !== 'Not Found') {
+      const ALLtreeElements: TreeElement[] = response.tree.filter(treeElement => treeElement.path.includes(`${slug}`));
     
-    const relatesTo: sha = head.at(0)?.sha
-    const pathToShaTuples = treeElements.map(post => [post.path, post.sha]);
-    return [(await Promise.all(pathToShaTuples.map(tuple => Octoblog.getComment(tuple))))
-      .sort((postA, postB) => postB.publishedAt - postA.publishedAt),relatesTo];
+      const head: TreeElement[] = ALLtreeElements.filter( treeElement => !treeElement.path.includes(`${slug}/`))
+      const treeElements: TreeElement[] = ALLtreeElements.filter( treeElement => treeElement.path.includes(`${slug}/`))
+    
+      const relatesTo: sha = head.at(0)?.sha
+      const pathToShaTuples = treeElements.map(post => [post.path, post.sha]);
+      return [(await Promise.all(pathToShaTuples.map(tuple => Octoblog.getComment(tuple))))
+        .sort((postA, postB) => postB.publishedAt - postA.publishedAt),relatesTo];
+    }
+    else return [(await Promise.resolve([])), '']
   }
 
   public static async commitComment(props: Map<string,string>, slug:string): Promise<IContent> {
