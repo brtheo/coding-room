@@ -17,6 +17,10 @@ export default function Salesforce() {
       title: 'javascript developer',
       src: './badges/javascript.png'
     },
+    {
+      title: 'experience cloud consultant',
+      src: './badges/expcons.png'
+    },
   ]
   return (
     <>
