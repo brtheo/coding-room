@@ -80,7 +80,7 @@ export default function Blog(props: PageProps<postWithComment>) {
         <main 
           data-color-mode="dark"
           data-dark-theme="dark"
-          class="markdown-body place-self-center min-h-full w-[95vw] md:w-[760px] row-start-3 col-start-2 p-2 mt-5 flex flex-col gap-5" >
+          class="markdown-body place-self-center min-h-full w-[95vw] md:w-[980px] row-start-3 col-start-2 p-2 mt-5 flex flex-col gap-5" >
           <Post isMainPage={false} post={post} comments={comments} sha={relatesTo}/>
         </main>
       </section>   
