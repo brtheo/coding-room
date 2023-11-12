@@ -1,0 +1,140 @@
+:root {
+  --black: #121212;
+  --white: #cacaca;
+  --electric: #D9D87D;
+  --dimmedLight: #779d46;
+  
+  font-family: 'Ellograph CF','Spline Sans Mono','Encode Sans Expanded';
+  font-size: 1.25rem !important;
+
+  --bgClr: var(--white);
+  --clr: var(--black);
+  --bgClrLighter: var(--white-300);
+  --clrLighter: var(--black-300);
+  --accent: var(--dimmedLight);
+  --contrast: black;
+}
+.dark {
+  --bgClr: var(--black);
+  --clr: var(--white);
+  --accent: var(--electric);
+  
+  --black-300: color-mix(in lab, white 30%, var(--clr));
+  --white-300: color-mix(in lab, white 60%, var(--clr));
+  --bgClrLighter: var(--black-300);
+  --clrLighter: var(--white-300);
+  --contrast: white;
+}
+*,*::before,*::after {box-sizing: border-box;}
+*::selection {background-color: var(--clr);}
+.isolate {isolation: isolate;}
+body {
+  background-color: var(--bgClr);
+  background-image: radial-gradient(var(--clr) 1px, transparent 0);
+  background-size: 40px 40px;
+  margin: 0 auto;
+  transition: all 100ms linear;
+  &>.container {
+    display: grid;
+    place-content: center;
+    justify-items: center;
+    padding: 2rem;
+    gap: 2rem;
+    margin: 2rem auto;
+    container: main-container / inline-size;
+    max-width: 1200px;
+  }
+}
+@container main-container (max-width: 620px) {}
+@container main-container (max-width: 840px) {
+  x-nav {
+    flex-direction: column-reverse;
+    margin-bottom: 4rem;
+    gap: 1rem;
+    &::part(menu-button) { 
+      display: initial;
+      top: 30px;
+      left: 10px;
+   }
+    &::part(aside) {
+      padding: 1rem;
+      position: absolute;
+      right: 0;
+      top: 0;
+      height: fit-content;
+    }
+    &::part(menu) {
+      height: fit-content;
+      position: absolute;
+      left: 0;
+      top: 3rem;
+      scale: 0;
+      transition: scale 100ms ease-in, transform 100ms linear !important;
+      animation: unset;
+      z-index: 1000;
+      --btnHeight: 50px;
+    }
+    &::part(menu-container) { flex-direction: column; }
+  }
+}
+@media screen and (max-width: 600px) {
+  body > .container {
+    padding: 0 .15rem;
+    margin: 0 .15rem;
+    margin-bottom: 2rem;
+  }
+  x-card {
+    padding: 1.5rem 1rem;
+    min-width: 1%;
+    width: 100%;
+  }
+  x-card[slf]::part(footer) { flex-flow: column; }
+  .badge {
+    translate: 0 calc(calc(var(--x) * -1) / 100px);
+    &:has(~ &:hover) {
+    translate: 0;
+  }
+  &:hover {
+    transform: none;
+    & ~ .badge {
+      translate: 0;
+    }
+  }
+  }
+}
+x-card:not([blog-post]),
+x-nav::part(menu),
+x-nav::part(aside) {
+  animation: floating 8600ms ease-in infinite;
+  animation-delay: calc(var(--delay, 0) * 320ms);
+  transform-style: preserve-3d;
+  transition: 
+    transform 100ms linear,
+    outline-offset 50ms linear;
+}
+
+x-card:not([blog-post]):hover,
+x-nav::part(menu):hover,
+x-nav::part(aside):hover {
+  transform: 
+    skew(-3deg,-2deg)
+    scaleZ(10);
+  outline: solid 3px var(--accent);
+  outline-offset: 15px;
+}
+
+x-card:nth-child(even):not([blog-post]),
+x-nav::part(aside) { 
+  --offset: -4px;
+  --offsetY: 4px;
+}
+x-card:nth-child(even):not([blog-post]):hover,
+x-nav::part(aside):hover {
+  transform: 
+    skew(3deg,2deg)
+    scaleZ(10);
+  }
+@keyframes floating {
+  33% { translate: 0 10px; }
+  66% { translate: 0 -8px; }
+}

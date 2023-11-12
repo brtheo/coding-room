@@ -1,0 +1,65 @@
+
+  .markdown-body {
+    letter-spacing: initial;
+    font-family: 'Sofia-pro' !important;
+    font-size: .9rem ;
+    background-color: transparent;
+    color: var(--clr);
+    & pre {
+      background-color: transparent!important;
+    }
+  }  
+  .markdown-body img { width: 100%;}   
+  .markdown-body pre { padding: 0px; font-family: 'Ellograph CF' !important; }   
+  .markdown-body code { font-family: 'Ellograph CF' !important; }
+  x-card {
+    max-width: 100%;
+    min-width: 1%;
+    width: 100%;
+  }
+  code.hljs::-webkit-scrollbar {
+    background: var(--bgClr);
+    height: 8px;
+  }
+  code.hljs::-webkit-scrollbar-thumb {
+    background: color-mix(in oklab, var(--clr) 60%, transparent);
+    border-radius: 100vh;
+  }
+  x-card::part(header) { text-transform: capitalize; }
+
+
+  @container main-container (min-width: 840px) {
+    .container { grid-template-columns: repeat(2, 1fr); }
+    x-nav {grid-column: 1 / span 2;}
+  }
+  x-card a {
+    width: fit-content;
+    margin-left: auto;
+    padding: .5rem 1rem;
+  }
+  .tags {
+    list-style: none;
+    padding-inline-start: 0px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    &>li {
+      --offset: 2px;
+      --offsetY: 2px;
+      padding: .25rem .5rem;
+      border: var(--clr) 3px solid;
+      border-radius: 100vh; 
+      width: fit-content;
+      line-height: 1.5;
+      background: var(--bgClr);
+      filter: drop-shadow(var(--offset) var(--offsetY) 0 var(--clr));
+    }
+  }
+  span[slot="footer"] {
+    font-size: .775rem;
+    opacity: .2;
+  }
+  x-card::part(footer) {
+    display: flex;
+    align-items: center;
+  }

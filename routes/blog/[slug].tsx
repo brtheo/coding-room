@@ -1,4 +1,5 @@
 import type { IComment, IPost, sha } from "../../types/Octoblog.d.ts";
+import { render } from "$gfm";
 
 import { Head } from "$fresh/runtime.ts";
 import { CSS } from "$gfm";
@@ -60,19 +61,32 @@ export const handler: Handlers<postWithComment> = {
 }
 
 export default function Blog(props: PageProps<postWithComment>) {
-  const [post, comments, relatesTo] = props.data
+  const [post, comments, relatesTo] = props.data;
+  // const theme = Boolean(+globalThis.sessionStorage.getItem('dark')!) ? 'light' : 'dark';
+  // console.log(theme)
   return (
     <>
       <Head>
         <title>Coding room</title>
-        <link rel="stylesheet" href="/shared.css"></link>
+        {/* <link rel="stylesheet" href="/shared.css"></link>
         <link rel="stylesheet" href="/blog.css"></link>
-        <link rel="stylesheet" href="/animations.css"></link>
+        <link rel="stylesheet" href="/animations.css"></link> */}
         <script defer async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
         <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+        
+        <link rel="stylesheet" href="https://use.typekit.net/ppc0skv.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.2.0/github-markdown-dark.min.css" integrity="sha512-Mo2QuokS9Y0JOuzVLUh3o9A07RqSXcpc2KC9LXxOwfaBgPt8ZHRiDfGQ2+tZw7xIno+ViWipTNLg1StC6TmwMA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="/blogv2.css" />
+        {/* <link rel="stylesheet" href="/theme.css" /> */}
         <style dangerouslySetInnerHTML={{__html:CSS}}></style>
       </Head>
-      <section 
+      <x-card blog-post title={post.title} style="width: 80%; grid-column: span 2;">
+        <main class="markdown-body" data-color-mode="dark"
+          data-dark-theme="dark" dangerouslySetInnerHTML={
+            { __html: render(post?.content,{disableHtmlSanitization:true}) }
+          }></main>
+      </x-card>
+      {/* <section 
         id="content"
         class="p-4 mx-auto min-h-[100dvh] bg-black text-white grid grid-cols-3 auto-rows-max" >
         <Header />
@@ -83,7 +97,7 @@ export default function Blog(props: PageProps<postWithComment>) {
           class="markdown-body place-self-center min-h-full w-[95vw] md:w-[980px] row-start-3 col-start-2 p-2 mt-5 flex flex-col gap-5" >
           <Post isMainPage={false} post={post} comments={comments} sha={relatesTo}/>
         </main>
-      </section>   
+      </section>    */}
     </>
   );
 }

@@ -1,0 +1,21 @@
+x-card[slf]::part(footer) {
+  display: flex;
+  margin-left: auto;        
+  transform-style: preserve-3d;
+}
+.badge {
+  height: 80px;
+  translate: var(--x);
+  --offset: 65%;
+  transition: scale 100ms linear, translate 100ms linear, transform 100ms linear;
+  &:has(~ &:hover) {
+    translate: calc(var(--x) - var(--offset));
+  }
+  &:hover {
+    transform: translateZ(10px) translateY(-15px);
+    scale: 1.3;
+    & ~ .badge {
+      translate: calc(var(--x) + var(--offset));
+    }
+  }
+}
